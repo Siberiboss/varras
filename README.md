@@ -17,17 +17,17 @@ varras/
 
 ### Backend
 
-cd backend
-./gradlew run
+- cd backend
+- ./gradlew run
 
 Jookseb:
 `http://localhost:8080/api/...`
 
 ### Frontend
 
-cd frontend
-npm install
-npm run dev
+- cd frontend
+- npm install
+- npm run dev
 
 Jookseb:  
 `http://localhost:5173`

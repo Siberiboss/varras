@@ -1,0 +1,22 @@
+micronaut:
+  application:
+    name: varras
+  server:
+      context-path: ${ENV_CONTEXT_PATH:`/api`}
+
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/varras
+    username: varras
+    password: parool
+    driverClassName: org.postgresql.Driver
+    schema-generate: DROPCREATE
+    dialect: POSTGRES
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl.auto: update
+        show_sql: true
+        format_sql: true
