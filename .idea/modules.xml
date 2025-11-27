@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/smit.iml" filepath="$PROJECT_DIR$/.idea/smit.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1521929168/varras.main.iml" filepath="$PROJECT_DIR$/.idea/modules/1521929168/varras.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1521929168/varras.test.iml" filepath="$PROJECT_DIR$/.idea/modules/1521929168/varras.test.iml" />
     </modules>
   </component>
 </project>

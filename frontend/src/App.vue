@@ -8,9 +8,9 @@
       <div :token="token">Tere, {{token.username}}</div>
       <button @click="logout">Logout</button>
 
-      <Categories />
+      <Categories/>
       <Fields />
-      <Items />
+      <Items/>
     </div>
   </div>
 </template>
@@ -24,6 +24,9 @@ import Fields from "./components/Fields.vue";
 
 export default {
   components: { Fields, Login, Categories, Items },
+  data() {
+    return { activeCategory: null }
+  },
   setup() {
     const token = ref(localStorage.getItem('token'))
 

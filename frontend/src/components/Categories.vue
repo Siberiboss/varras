@@ -11,7 +11,7 @@
           v-for="c in categories"
           :key="c.id"
           :class="{ active: activeCategory === c.id }"
-          @click="activeCategory = c.id;console.log(activeCategory)"
+          @click="activateCategory(c.id)"
           style="cursor:pointer;"
       >{{ c.name }}
         <button @click="remove(c.id)">x</button>
@@ -22,12 +22,14 @@
 
 <script>
 import axios from 'axios'
+import { emitter } from '../event-bus'
 
 export default {
   data() {
     return {
       categories: [],
       newName: '',
+      activeCategory: null,
     }
   },
   async mounted() {
@@ -49,6 +51,10 @@ export default {
     async remove(id) {
       await axios.delete(`/api/categories/${id}`)
       this.fetch()
+    },
+    activateCategory(activeId) {
+      this.activeCategory = activeId;
+      emitter.emit("categoryActivated", Number(activeId));
     }
   }
 }

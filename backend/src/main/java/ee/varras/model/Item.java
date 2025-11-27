@@ -15,8 +15,8 @@ public class Item {
     private Long id;
 
     @Column(nullable = false)
-    private String title;
-    private String location;
+    private String name;
+    private String condition;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id", nullable = false)
@@ -28,19 +28,23 @@ public class Item {
 
     public Long getId() { return id; }
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
-
-    public String getLocation() { return location; }
-    public void setLocation(String location) { this.location = location; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getCondition() { return condition; }
 
     public Category getCategory() { return category; }
     public void setCategory(Category category) { this.category = category; }
+    public void setCondition(String condition) { this.condition = condition; }
 
     public Map<String, Object> getDynamicFields() { return dynamicFields; }
     public void setDynamicFields(Map<String, Object> dynamicFields) { this.dynamicFields = dynamicFields; }
 
-    public Item(String title, Category category) {
+    public Item() {}
+
+    public Item(String name, String condition, Category category) {
+        this.name = name;
+        this.category = category;
+        this.condition = condition;
     }
 
 }

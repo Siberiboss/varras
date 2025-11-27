@@ -2,7 +2,7 @@ micronaut:
   application:
     name: varras
   server:
-      context-path: ${ENV_CONTEXT_PATH:`/api`}
+      context-path: /api
 
 datasources:
   default:

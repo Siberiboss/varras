@@ -6,13 +6,13 @@
 
     <ItemForm
       v-if="showForm"
-      :categories="categories"
+      :attributes="attributes"
       @created="onCreated"
     />
 
     <ul>
       <li v-for="i in items" :key="i.id">
-        {{ i.title }} ({{ i.category?.name }})
+        {{ i.name }} ({{ i.attribute?.name }})
       </li>
     </ul>
   </div>
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       items: [],
-      categories: [],
+      attributes: [],
       showForm: false
     }
   },
@@ -37,9 +37,9 @@ export default {
   methods: {
     async fetch() {
       const res1 = await axios.get('/api/items')
-      const res2 = await axios.get('/api/categories')
+      const res2 = await axios.get('/api/attributes')
       this.items = res1.data
-      this.categories = res2.data
+      this.attributes = res2.data
     },
     toggleForm() { this.showForm = !this.showForm },
     onCreated() {

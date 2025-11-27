@@ -27,9 +27,6 @@ class AttributeControllerTest {
     @Client("/api")
     HttpClient client;
 
-    @Inject
-    CategoryService service;
-
     Long createCategory(String name) {
         CategoryDto resp = client.toBlocking().retrieve(
                 HttpRequest.POST(

@@ -5,6 +5,8 @@ import ee.varras.model.*;
 import ee.varras.repository.*;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 
 import java.util.*;
 
@@ -21,14 +23,18 @@ public class ItemService {
     AttributeRepository attributeRepository;
 
     @Inject
+    private EntityManager entityManager;
+
+    @Inject
     ItemAttributeValueRepository itemAttributeValueRepository;
 
+    @Transactional
     public ItemDto create(Long categoryId, CreateItemDto dto) {
 
-        Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new IllegalArgumentException("Category not found: " + categoryId));
+        Category category = entityManager.getReference(Category.class, categoryId);
 
-        Item item = new Item(dto.getName(), category);
+        Item item = new Item(dto.getName(), dto.getCondition(), category);
+        System.out.println("Here we go: " + category.getName());
         item = itemRepository.save(item);
 /*
         // save attribute values
@@ -125,7 +131,7 @@ public class ItemService {
         }
 
         return new ItemDto(
-                i.getId(),
+                i.getName(),
                 i.getCategory().getId(),
                 values
         );

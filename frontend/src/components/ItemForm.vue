@@ -2,67 +2,53 @@
   <div style="border:1px solid #ccc; padding:10px; margin-top:10px">
     <h4>Create item</h4>
 
-    <input v-model="title" placeholder="title" />
-    <input v-model="location" placeholder="location" />
-
-    <select v-model="categoryId">
-      <option v-for="c in categories" :key="c.id" :value="c.id">
-        {{ c.name }}
-      </option>
-    </select>
+    <input v-model="name" placeholder="title" />
+    <input v-model="condition" placeholder="condition" />
 
     <h4>Dynamic fields</h4>
 
-    <div v-for="(f, index) in dynamicFields" :key="index">
-      <input v-model="f.key" placeholder="key" />
-      <input v-model="f.value" placeholder="value" />
-      <button @click="removeField(index)">x</button>
-    </div>
+<!--    <div v-for="(f, index) in dynamicFields" :key="index">-->
+<!--      <input v-model="f.key" placeholder="key" />-->
+<!--      <input v-model="f.value" placeholder="value" />-->
+<!--      <button @click="removeField(index)">x</button>-->
+<!--    </div>-->
 
     <button @click="addField">Add field</button>
 
     <br /><br />
-    <button @click="save(categoryId)">Save</button>
+    <button @click="save()">Save</button>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { emitter } from '../event-bus.js'
 
 export default {
-  props: ['categories'],
+  props: ['attributes', 'activeCategory'],
   data() {
     return {
-      title: '',
-      location: '',
-      categoryId: null,
-      activeCategory: null,
-      dynamicFields: []
+      name: '',
+      condition: '',
+      activeCategory: null
     }
   },
+  created() {
+    emitter.on("categoryActivated", (number) => {
+      console.log(number)
+      this.activeCategory = number;
+    });
+  },
   methods: {
-    addField() {
-      this.dynamicFields.push({ key: '', value: '' })
-    },
-    removeField(i) {
-      this.dynamicFields.splice(i, 1)
-    },
-    async save(categoryId) {
-      console.log(this.activeCategory);
+    async save() {
       if (!this.activeCategory) {
         alert("Please select a category!")
-        return
+        return;
       }
 
-      const dyn = {}
-      for (const f of this.dynamicFields) {
-        dyn[f.key] = f.value
-      }
-      categoryId = this.activeCategory;
       await axios.post(`/api/categories/${this.activeCategory}/items`, {
-        title: this.title,
-        location: this.location,
-        dynamicFields: dyn
+        name: this.name,
+        condition: this.condition
       })
       this.$emit('created')
     }

@@ -19,5 +19,7 @@
     <orderEntry type="library" name="Gradle: jakarta.transaction:jakarta.transaction-api:2.0.1" level="project" />
     <orderEntry type="library" name="Gradle: io.micronaut:micronaut-http:4.10.8" level="project" />
     <orderEntry type="library" name="Gradle: io.micronaut:micronaut-core:4.10.8" level="project" />
+    <orderEntry type="library" name="Gradle: io.micronaut.data:micronaut-data-jpa:4.14.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.19.2" level="project" />
   </component>
 </module>
